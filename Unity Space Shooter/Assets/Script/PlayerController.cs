@@ -17,14 +17,13 @@ public class PlayerController : MonoBehaviour
     //--Executing the code just before updating the frame
     public void Update()
     {
-
-
-        if (Input.GetButton("Fire1") && Time.time > nextFire)
+        if ((Input.GetButton("Fire1") || Input.GetKey(KeyCode.Space)) && Time.time > nextFire)
         {
             nextFire = Time.time + fireRate;
             Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+            var audio = GetComponent<AudioSource>();
+            audio.Play();
         }
-        
     }
 
     // Update is called once per frame

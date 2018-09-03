@@ -6,6 +6,21 @@ public class DestroyByContect : MonoBehaviour
 {
     public GameObject explosion;
     public GameObject playerExplosion;
+    public int scoreValue;
+    private GameController gameController;
+
+    public void Start()
+    {
+        GameObject gameControllerObject = GameObject.FindWithTag("GameController");
+        if (gameControllerObject != null)
+        {
+            gameController = gameControllerObject.GetComponent<GameController>();
+        }
+        if (gameController == null)
+        {
+            Debug.Log("Cannot find 'GameController' script");
+        }
+    }
 
     //--This method is executed when the collider enters into the trigger
     private void OnTriggerEnter(Collider other)
@@ -21,6 +36,8 @@ public class DestroyByContect : MonoBehaviour
         if (other.tag == "Player")
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
 
+        scoreValue++;
+        gameController.AddScore(scoreValue); //--Adding Score
         Destroy(other.gameObject); //--destroy the collider
         Destroy(this.gameObject);  //--destroy the asteroid
     }

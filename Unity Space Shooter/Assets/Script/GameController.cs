@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 //--Main class of the Game, controls everything
 public class GameController : MonoBehaviour
@@ -13,6 +14,9 @@ public class GameController : MonoBehaviour
     public float spawnWait;
     public float startWait;
     public float waveWait;
+
+    public Text scoreText;
+    private int score;
 
     #endregion
 
@@ -43,13 +47,21 @@ public class GameController : MonoBehaviour
     // Use this for initialization
     public void Start()
     {
+        score = 0;
+        //scoreText = GetComponent<Text>();
+        UpdateScore();
         StartCoroutine(SpawnWaves());
     }
 
-    // Update is called once per frame
-    public void Update()
+    public void AddScore(int newScoreValue)
     {
+        score += newScoreValue;
+        UpdateScore();
+    }
 
+    void UpdateScore()
+    {
+        scoreText.text = "Score: " + score;
     }
 
     #endregion

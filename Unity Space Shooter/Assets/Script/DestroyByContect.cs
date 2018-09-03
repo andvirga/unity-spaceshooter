@@ -34,7 +34,11 @@ public class DestroyByContect : MonoBehaviour
 
         //--Instantiates player explosion (if collides with the asteroid)
         if (other.tag == "Player")
+        {
             Instantiate(playerExplosion, other.transform.position, other.transform.rotation);
+            gameController.GameOver();
+        }
+            
 
         scoreValue++;
         gameController.AddScore(scoreValue); //--Adding Score
